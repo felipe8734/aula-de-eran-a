@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Auto Safe — Prevenção contra álcool e direção</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  
+  :root{
+    --bg:#0a0a0a;
+    --bg-alt:#141414;
+    --card:#161010;
+    --border:#5c0e1f;
+    --accent:#7a1428;
+    --accent-bright:#c9455f;
+    --text:#f2eaea;
+    --text-dim:#b8a9ac;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+  html,body{height:100%}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Manrope',sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  img{max-width:100%}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  h1,h2,h3{font-family:'Unbounded',sans-serif;line-height:1.15}
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky;top:env(safe-area-inset-top,0px);z-index:20;
+    background:rgba(13,10,20,.85);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1080px;margin:0 auto}
+  .logo{font-family:'Unbounded',sans-serif;font-weight:700;font-size:1.1rem;letter-spacing:.02em}
+  .logo span{color:var(--accent-bright)}
+  .nav a.cta{
+    background:var(--accent);color:#fff;padding:10px 20px;border-radius:8px;
+    text-decoration:none;font-weight:700;font-size:.9rem;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{padding:72px 0 56px;position:relative}
+  .hero .eyebrow{color:var(--accent-bright);font-weight:700;font-size:.95rem;margin-bottom:14px}
+  .hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:900;max-width:14ch}
+  .hero p{color:var(--text-dim);max-width:46ch;margin-top:18px;font-size:1.05rem}
+  .hero .actions{display:flex;gap:14px;margin-top:32px;flex-wrap:wrap}
+  .btn-primary{background:var(--accent);color:#fff;padding:14px 26px;border-radius:8px;font-weight:700;text-decoration:none}
+  .btn-ghost{border:1px solid var(--border);color:var(--text);padding:14px 26px;border-radius:8px;font-weight:700;text-decoration:none}
+  .hero-graphic{margin-top:48px;border:1px solid var(--border);border-radius:16px;background:var(--card);padding:36px;display:flex;align-items:center;justify-content:center}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:64px 0}
+  .section-title{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:700;max-width:20ch}
+  .section-sub{color:var(--text-dim);margin-top:10px;max-width:52ch}
+
+  .grid{display:grid;gap:20px;margin-top:36px;grid-template-columns:repeat(3,1fr)}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:26px}
+  .card h3{font-size:1.1rem;font-weight:700;margin-bottom:10px}
+  .card p{color:var(--text-dim);font-size:.95rem}
+  .card .num{color:var(--accent-bright);font-family:'Unbounded',sans-serif;font-weight:700;font-size:.85rem;display:block;margin-bottom:12px}
+
+  /* ---------- INFINITE MARQUEE (rolagem infinita) ---------- */
+  .marquee-section{padding:48px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg-alt)}
+  .marquee{overflow:hidden;position:relative;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+  .marquee-track{display:flex;width:max-content;gap:16px;animation:scroll-left 32s linear infinite}
+  .marquee:hover .marquee-track{animation-play-state:paused}
+  .chip{
+    white-space:nowrap;background:var(--card);border:1px solid var(--border);
+    padding:14px 22px;border-radius:999px;font-weight:700;font-size:.95rem;color:var(--accent-bright);
+  }
+  @keyframes scroll-left{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion:reduce){.marquee-track{animation:none}}
+
+  /* ---------- TESTIMONIALS (infinite too) ---------- */
+  .testi-track{display:flex;width:max-content;gap:20px;animation:scroll-left 48s linear infinite}
+  .testi{
+    width:300px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;white-space:normal;
+  }
+  .testi p{color:var(--text);font-size:.95rem}
+  .testi .who{color:var(--text-dim);font-size:.85rem;margin-top:14px;font-weight:700}
+
+  /* ---------- SPECS ---------- */
+  .specs{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:36px;border-top:1px solid var(--border)}
+  .spec-row{display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--border)}
+  .spec-row span:first-child{color:var(--text-dim)}
+  .spec-row span:last-child{font-weight:700}
+
+  /* ---------- FINAL CTA ---------- */
+  .final-cta{text-align:center;padding:72px 24px;background:linear-gradient(180deg,var(--bg) 0%,var(--bg-alt) 100%)}
+  .final-cta h2{font-size:clamp(1.8rem,5vw,2.6rem)}
+  .final-cta p{color:var(--text-dim);margin:16px auto 28px;max-width:44ch}
+
+  footer{padding:32px 24px;text-align:center;color:var(--text-dim);font-size:.85rem;border-top:1px solid var(--border)}
+
+  @media (max-width:760px){
+    .grid{grid-template-columns:1fr}
+    .specs{grid-template-columns:1fr}
+    .nav a.cta{padding:8px 14px;font-size:.85rem}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">Auto<span>Safe</span></div>
+    <a class="cta" href="#final">Peça o seu</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Prevenção de acidentes com Arduino</p>
+      <!-- ===== TEXTO EDITÁVEL: Título principal ===== -->
+      <h1>Se bebeu, o carro nem sai do lugar.</h1>
+      <!-- ===== TEXTO EDITÁVEL: Parágrafo de abertura ===== -->
+      <p>O Auto Safe é um bafômetro integrado ao carro: identifica a presença de álcool no ar expirado pelo motorista e, se o nível estiver acima do limite definido, impede que o veículo saia, ajudando a evitar acidentes causados por álcool e direção.</p>
+      <div class="actions">
+        <a class="btn-primary" href="#final">Quero instalar</a>
+        <a class="btn-ghost" href="#como-funciona">Ver como funciona</a>
+      </div>
+      <div class="hero-graphic">
+        <svg width="100%" height="180" viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M40 120c0-10 8-18 18-18h20l16-30c4-8 12-13 21-13h130c9 0 17 5 21 13l16 30h20c10 0 18 8 18 18v20H40v-20z" stroke="#C9A9FF" stroke-width="2"/>
+          <circle cx="110" cy="140" r="16" stroke="#8B5CF6" stroke-width="2"/>
+          <circle cx="290" cy="140" r="16" stroke="#8B5CF6" stroke-width="2"/>
+          <circle cx="200" cy="60" r="6" fill="#C9A9FF"/>
+          <path d="M200 60v-24" stroke="#8B5CF6" stroke-width="2"/>
+          <circle cx="200" cy="30" r="4" fill="#8B5CF6" opacity=".6"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section id="como-funciona">
+    <div class="wrap">
+      <!-- ===== TEXTO EDITÁVEL: Título da seção "Como funciona" ===== -->
+      <h2 class="section-title">Três etapas, um só objetivo: ninguém dirigir alcoolizado</h2>
+      <p class="section-sub">Instalado no painel do veículo, o Auto Safe combina detecção, alerta e bloqueio automático.</p>
+
+      <!-- ===== TEXTO EDITÁVEL: Explicação técnica detalhada ===== -->
+      <p style="color:var(--text-dim);margin-top:24px;max-width:70ch">
+        O funcionamento do Auto Safe é dividido em três etapas controladas por um Arduino. Antes de ligar o carro, o motorista precisa soprar em um sensor de álcool (ex.: MQ-3) instalado próximo ao painel. Esse sensor converte a concentração de álcool no ar expirado em um sinal elétrico, que é lido pelo Arduino a cada ciclo de leitura. O microcontrolador compara esse valor com um limite de segurança definido no código do projeto (calibrado durante os testes). Se a leitura estiver dentro do limite permitido, o sistema libera a ignição normalmente. Se estiver acima do limite, o Arduino aciona três saídas ao mesmo tempo: os LEDs vermelhos, o buzzer sonoro e o relé responsável por interromper a alimentação do motor — além de ligar o pisca-alerta do veículo, sinalizando aos demais motoristas que o carro foi parado por segurança. [EDITAR] Complemente aqui com os valores reais usados no seu projeto: limite de álcool definido, tempo médio de resposta do sensor e o componente exato usado para bloquear a ignição (relé, transistor, etc.).
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <span class="num">Detecção</span>
+          <!-- ===== TEXTO EDITÁVEL: Card 1 ===== -->
+          <h3>Sensor de álcool no ar expirado</h3>
+          <p>O motorista sopra no sensor antes de partir, e o Arduino analisa o nível de álcool em segundos.</p>
+        </div>
+        <div class="card">
+          <span class="num">Alerta</span>
+          <!-- ===== TEXTO EDITÁVEL: Card 2 ===== -->
+          <h3>LEDs e buzzer imediatos</h3>
+          <p>Se o nível estiver acima do limite, os LEDs vermelhos acendem e o buzzer emite um alerta sonoro na hora.</p>
+        </div>
+        <div class="card">
+          <span class="num">Bloqueio</span>
+          <!-- ===== TEXTO EDITÁVEL: Card 3 ===== -->
+          <h3>O carro para imediatamente</h3>
+          <p>O sistema interrompe o funcionamento do veículo e liga o pisca-alerta, sinalizando a parada por segurança.</p>
+        </div>
+      </div>
+
+      <!-- ===== ESPAÇO PARA VÍDEO DO YOUTUBE ===== -->
+      <!-- Troque SEU_ID_AQUI pelo ID do seu vídeo (a parte depois de "v=" no link do YouTube) -->
+      <div style="margin-top:40px;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--card)">
+        <div style="position:relative;padding-top:56.25%">
+          <iframe
+            src="https://www.youtube.com/embed/SEU_ID_AQUI"
+            title="Vídeo de demonstração do Auto Safe"
+            style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee-section">
+    <div class="marquee">
+      <!-- ===== TEXTO EDITÁVEL: Itens da faixa de rolagem infinita ===== -->
+      <div class="marquee-track" id="chipTrack">
+        <span class="chip">Sensor de álcool MQ-3</span>
+        <span class="chip">Bloqueio automático do motor</span>
+        <span class="chip">LEDs vermelhos de alerta</span>
+        <span class="chip">Buzzer sonoro</span>
+        <span class="chip">Ativação do pisca-alerta</span>
+        <span class="chip">Controlado por Arduino</span>
+        <span class="chip">Resposta em segundos</span>
+        <span class="chip">Projeto de Sistemas Embarcados</span>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <!-- ===== TEXTO EDITÁVEL: Título depoimentos ===== -->
+      <h2 class="section-title">Por que o Auto Safe faz diferença</h2>
+      <div class="marquee" style="margin-top:32px">
+        <div class="testi-track" id="testiTrack">
+          <!-- ===== TEXTO EDITÁVEL: Depoimentos/impressões sobre o projeto ===== -->
+          <div class="testi"><p>[EDITAR] Depoimento ou impressão de um professor/avaliador sobre o projeto.</p><div class="who">Nome</div></div>
+          <div class="testi"><p>[EDITAR] Depoimento sobre a eficácia do sensor nos testes.</p><div class="who">Nome</div></div>
+          <div class="testi"><p>[EDITAR] Depoimento sobre a importância do projeto para a disciplina.</p><div class="who">Nome</div></div>
+          <div class="testi"><p>[EDITAR] Depoimento sobre a resposta rápida do sistema em testes práticos.</p><div class="who">Nome</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <!-- ===== TEXTO EDITÁVEL: Título especificações ===== -->
+      <h2 class="section-title">Especificações</h2>
+      <div class="specs">
+        <div>
+          <div class="spec-row"><span>Microcontrolador</span><span>Arduino</span></div>
+          <div class="spec-row"><span>Sensor</span><span>[EDITAR] ex.: MQ-3 (álcool)</span></div>
+          <div class="spec-row"><span>Tempo de resposta</span><span>[EDITAR] segundos</span></div>
+        </div>
+        <div>
+          <div class="spec-row"><span>Sinalização</span><span>LEDs vermelhos + buzzer</span></div>
+          <div class="spec-row"><span>Ação ao detectar álcool</span><span>Bloqueia o carro + pisca-alerta</span></div>
+          <div class="spec-row"><span>Instalação</span><span>[EDITAR] painel do veículo</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="galeria-projeto">
+    <div class="wrap">
+      <!-- ===== TEXTO EDITÁVEL: Título da galeria do projeto ===== -->
+      <h2 class="section-title">O projeto em detalhes</h2>
+      <p class="section-sub">Textos, fotos e vídeos do desenvolvimento do Auto Safe. Role para ver mais.</p>
+    </div>
+    <div id="galeria" class="galeria"></div>
+    <div id="carregando" class="carregando">carregando mais conteúdo…</div>
+  </section>
+
+  <section class="final-cta" id="final">
+    <!-- ===== TEXTO EDITÁVEL: Chamada final ===== -->
+    <h2>Tecnologia a favor da vida</h2>
+    <p>Conheça o projeto Auto Safe e como ele ajuda a prevenir acidentes causados por álcool e direção.</p>
+    <a class="btn-primary" href="#">Falar sobre o projeto</a>
+  </section>
+</main>
+
+<footer>
+  <!-- ===== TEXTO EDITÁVEL: Rodapé ===== -->
+  © 2026 Auto Safe. Todos os direitos reservados.
+</footer>
+
+<script src="script.js"></script>
+<script>
+  // Duplica os itens da faixa e dos depoimentos para o efeito de rolagem infinita sem emenda
+  document.querySelectorAll('#chipTrack, #testiTrack').forEach(function(track){
+    track.innerHTML += track.innerHTML;
+  });
+</script>
+
+</body>
+</html>
